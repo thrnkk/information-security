@@ -77,14 +77,17 @@ class AES(object):
     def encrypt_file(self, file_path: str, key: str, output_file: str) -> None:
 
         s = ""
-
         if mimetypes.guess_type(file_path)[0] == 'text/plain':
             with open(file_path, "r") as f:
                 s = self.encrypt(f.read(), key)
 
-        else:
+        elif mimetypes.guess_type(file_path)[0] == 'application/octet-stream':
             with open(file_path, "rb") as f:
                 s = self.encrypt(f.read().decode('utf-8'), key)
+        else:
+            with open(file_path, "rb") as f:
+                byte = b64encode(f.read())
+                s = self.encrypt(byte, key)
 
         file = open(output_file, "w")
         file.write(array_to_str(s))
