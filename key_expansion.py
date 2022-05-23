@@ -26,7 +26,7 @@ class KeyExpansion(object):
 
         return round_key
 
-    def get_current_round_key(self, position) -> list:
+    def get_current_round_key(self, position: int) -> list:
 
         round_key = [[], [], [], []]
 
@@ -40,32 +40,32 @@ class KeyExpansion(object):
 
         return round_key
 
-    def get_word(self, position) -> list:
+    def get_word(self, position: int) -> list:
 
         round_key = self.get_last_round_key()
 
         return [i[position] for i in round_key]
 
-    def rotate_bytes(self, a) -> list:
+    def rotate_bytes(self, a: list) -> list:
 
         return a[1:] + a[:1]
 
-    def replace_word(self, word) -> list:
+    def replace_word(self, word: list) -> list:
 
         return [hex(s_box[int(byte, 16)]) for byte in word]
 
-    def get_round_constant(self, position) -> list:
+    def get_round_constant(self, position: int) -> list:
 
         return [self.round_constant[position], '0x00', '0x00', '0x00']
 
-    def key_add_word(self, word) -> None:
+    def key_add_word(self, word: list) -> None:
 
         self.key[0].append(word[0])
         self.key[1].append(word[1])
         self.key[2].append(word[2])
         self.key[3].append(word[3])
 
-    def expand_key(self, key) -> None:
+    def expand_key(self, key: list) -> list:
 
         self.key = array_to_matrix(bytes_string_to_hex_array(key))
 
