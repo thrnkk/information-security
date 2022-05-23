@@ -1,4 +1,9 @@
+# Nomes: Luis Augusto Kuhn, Thomas Ricardo Reinke
 from variables import l_table, e_table
+
+def bytes_string_to_hex_array(text: str) -> list:
+
+    return [hex(int(i)) for i in text.split(',')]
 
 def string_to_hex_array(text: str) -> list:
     
@@ -23,6 +28,15 @@ def matrix_to_array(matrix):
 def array_xor_array(a, b):
 
     return [hex(int(i, 16) ^ int(j, 16)) for i, j in zip(a, b)]
+
+def printArray(array):
+
+    cleanString =""
+    for i in array:
+        for n in i:
+            cleanString =cleanString + f' {n}'
+
+    return cleanString
 
 def galois_multiplication(a, b):
 

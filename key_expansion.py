@@ -1,5 +1,7 @@
+# Nomes: Luis Augusto Kuhn, Thomas Ricardo Reinke
+
 from variables import s_box, l_table, e_table
-from utils import string_to_hex_array, array_to_matrix, array_xor_array
+from utils import bytes_string_to_hex_array, array_to_matrix, array_xor_array
 
 
 class KeyExpansion(object):
@@ -65,7 +67,7 @@ class KeyExpansion(object):
 
     def expand_key(self, key) -> None:
 
-        self.key = array_to_matrix(string_to_hex_array(key))
+        self.key = array_to_matrix(bytes_string_to_hex_array(key))
 
         for i in range(10):
 
