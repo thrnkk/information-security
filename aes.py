@@ -80,14 +80,9 @@ class AES(object):
         if mimetypes.guess_type(file_path)[0] == 'text/plain':
             with open(file_path, "r") as f:
                 s = self.encrypt(f.read(), key)
-
-        elif mimetypes.guess_type(file_path)[0] == 'application/octet-stream':
-            with open(file_path, "rb") as f:
-                s = self.encrypt(f.read().decode('utf-8'), key)
         else:
             with open(file_path, "rb") as f:
-                byte = b64encode(f.read())
-                s = self.encrypt(byte, key)
+                s = self.encrypt(str(f.read()), key)
 
         file = open(output_file, "w")
         file.write(array_to_str(s))
@@ -128,7 +123,11 @@ class AES(object):
 
 
 aes = AES()
-key = '65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80'
+key1 = '65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80'
 
-aes.encrypt_file('assets\sample.bin', key, 'out5.txt')
+aes.encrypt_file('assets\\demo.txt', key1, 'out0.txt')
+aes.encrypt_file('assets\\sample.bin', key1, 'out1.txt')
+aes.encrypt_file('assets\\arquivo1.jpg', key1, 'out2.txt')
 
+key2 = '10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160'
+aes.encrypt_file('assets\\arquivo-b.gif', key2, 'out3.txt')
